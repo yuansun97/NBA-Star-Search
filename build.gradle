@@ -1,0 +1,59 @@
+apply plugin: 'checkstyle'
+apply plugin: 'edu.illinois.cs.cs125.gradlegrader'
+
+buildscript {
+    repositories {
+        google()
+        jcenter()
+        maven {
+            url 'https://jitpack.io'
+        }
+    }
+    dependencies {
+        classpath 'org.eclipse.jgit:org.eclipse.jgit:5.2.1.201812262042-r'
+        classpath 'com.github.cs125-illinois:gradlegrader:0.13.5'
+        classpath 'com.android.tools.build:gradle:3.3.0'
+    }
+}
+allprojects {
+    repositories {
+        google()
+        jcenter()
+    }
+}
+task copyFiles << {
+    if (file('.idea').exists()) {
+        copy {
+            from '.preserve/runConfigurations'
+            into '.idea/runConfigurations'
+        }
+        copy {
+            from '.preserve/inspectionProfiles'
+            into '.idea/inspectionProfiles'
+        }
+        copy {
+            from '.preserve/checkstyle-idea.xml'
+            into '.idea'
+        }
+    }
+}
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+checkstyle {
+    toolVersion "8.16"
+    configFile = new File(rootDir, "config/checkstyle.xml")
+}
+task checkstyleMain(type: Checkstyle) {
+    source 'app/src/main', 'lib/src/main'
+    include '**/*.java'
+    exclude '**/gen/**'
+    exclude '**/R.java'
+    exclude '**/BuildConfig.java'
+    classpath = files()
+    ignoreFailures = true
+}
+
+defaultTasks 'grade'
+
+// vim: ts=4:sw=4:et:ft=groovy

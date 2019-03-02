@@ -1,0 +1,13 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Test App" type="AndroidJUnit" factoryName="Android JUnit">
+    <module name="app" />
+    <option name="PACKAGE_NAME" value="edu.illinois.cs.cs125.spring2019.mp3" />
+    <option name="MAIN_CLASS_NAME" value="edu.illinois.cs.cs125.spring2019.mp3.ApiAppTest" />
+    <option name="METHOD_NAME" value="" />
+    <option name="PARAMETERS" value="" />
+    <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+    <method v="2">
+      <option name="Android.Gradle.BeforeRunTask" enabled="true" />
+    </method>
+  </configuration>
+</component>

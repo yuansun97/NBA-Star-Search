@@ -1,0 +1,15 @@
+apply plugin: 'java'
+
+dependencies {
+    implementation 'org.apache.commons:commons-lang3:3.8.1'
+    implementation 'com.google.code.gson:gson:2.8.2'
+    testImplementation 'junit:junit:4.12'
+}
+processTestResources {
+    exclude '**/*.js'
+}
+gradle.projectsEvaluated {
+    build.finalizedBy(rootProject.tasks.copyFiles)
+}
+
+// vim: ts=4:sw=4:et:ft=groovy

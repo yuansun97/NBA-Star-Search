@@ -1,0 +1,157 @@
+name: "MP3"
+semester: "Spring2019"
+version: 1.0.0
+package: "edu.illinois.cs.cs125.spring2019.mp3.lib"
+grading:
+  timeout: PT5M
+  run: "docker run --rm -m 512MB --cpus=1.0 --network none -v {{ gradeDir }}:/base cs125/mp3-spring2019-grader:0.1 -Pgrade.capture -Pgrade.reporting.file=grade.json"
+  ignoreOutput:
+    - "^WARNING: Your kernel does not support swap limit capabilities or the cgroup is not mounted.*"
+    - "^To honour the JVM settings for this build.*"
+    - "^Daemon will be stopped at the end of the build.*"
+    - "^> Configure.*"
+    - "^WARNING: The option setting 'android.enableUnitTestBinaryResources=true' is experimental and unsupported\\.$"
+    - "^The current default is 'false'\\.$"
+    - "^> Task .*"
+    - "^> Transform .*"
+scoring:
+  max: 100
+  selectors:
+    - checkstyle
+    - test
+forceCommitAfterPoints: true
+vcs:
+  git: true
+students:
+  location: email.txt
+  require: true
+  count: 1
+  suffix: "@illinois.edu"
+tasks:
+  - "lib:test"
+  - "app:testDebugUnitTest"
+reporting:
+  post: "https://cs125-reporting.cs.illinois.edu/progress"
+notes:
+  "Note that the maximum local grade is 80/100. 10 points will be provided
+  during official grading if you have submitted code that earns at least 50
+  points by Monday 3/11/2019 at 5PM. 10 more points will be provided for
+  correctly implementing isRick, for which we are not providing test cases."
+checkstyle:
+  name: "checkstyle Tests"
+  missing:
+    score: 0
+    message: "checkstyle crashed due to a syntax error"
+    name: "checkstyle"
+  selectors:
+    - selector: "count(//file/error) = 0"
+      score: 10
+      message: "No checkstyle errors were reported"
+      name: "checkstyle"
+    - selector: "count(//file/error) > 0"
+      score: 0
+      message: "checkstyle errors were reported"
+      name: "checkstyle"
+test:
+  name: "JUnit Tests"
+  selectors:
+    - selector: "count(//testsuite[@name='edu.illinois.cs.cs125.spring2019.mp3.lib.RecognizePhotoTest']) = 0"
+      score: 0
+      message: "RecognizePhotoTest didn't compile"
+      name: "Library"
+    - selector: "count(//testcase[@name='testWidth']) = 1 and count(//testcase[@name='testWidth']//failure) = 0"
+      score: 5
+      message: "testWidth succeeded"
+      name: "Library"
+    - selector: "count(//testcase[@name='testWidth']) = 1 and count(//testcase[@name='testWidth']//failure) > 0"
+      score: 0
+      message: "testWidth failed"
+      name: "Library"
+    - selector: "count(//testcase[@name='testHeight']) = 1 and count(//testcase[@name='testHeight']//failure) = 0"
+      score: 5
+      message: "testHeight succeeded"
+      name: "Library"
+    - selector: "count(//testcase[@name='testHeight']) = 1 and count(//testcase[@name='testHeight']//failure) > 0"
+      score: 0
+      message: "testHeight failed"
+      name: "Library"
+    - selector: "count(//testcase[@name='testFormat']) = 1 and count(//testcase[@name='testFormat']//failure) = 0"
+      score: 5
+      message: "testFormat succeeded"
+      name: "Library"
+    - selector: "count(//testcase[@name='testFormat']) = 1 and count(//testcase[@name='testFormat']//failure) > 0"
+      score: 0
+      message: "testFormat failed"
+      name: "Library"
+    - selector: "count(//testcase[@name='testCaption']) = 1 and count(//testcase[@name='testCaption']//failure) = 0"
+      score: 10
+      message: "testCaption succeeded"
+      name: "Library"
+    - selector: "count(//testcase[@name='testCaption']) = 1 and count(//testcase[@name='testCaption']//failure) > 0"
+      score: 0
+      message: "testCaption failed"
+      name: "Library"
+    - selector: "count(//testcase[@name='testDog']) = 1 and count(//testcase[@name='testDog']//failure) = 0"
+      score: 10
+      message: "testDog succeeded"
+      name: "Library"
+    - selector: "count(//testcase[@name='testDog']) = 1 and count(//testcase[@name='testDog']//failure) > 0"
+      score: 0
+      message: "testDog failed"
+      name: "Library"
+    - selector: "count(//testcase[@name='testCat']) = 1 and count(//testcase[@name='testCat']//failure) = 0"
+      score: 10
+      message: "testCat succeeded"
+      name: "Library"
+    - selector: "count(//testcase[@name='testCat']) = 1 and count(//testcase[@name='testCat']//failure) > 0"
+      score: 0
+      message: "testCat failed"
+      name: "Library"
+    - selector: "count(//testsuite[@name='edu.illinois.cs.cs125.spring2019.mp3.lib.RecognizePhotoTest']) > 0 and count(//testcase[@name='testRick']) = 0"
+      score: 0
+      message: "isRick not tested"
+      name: "Library"
+    - selector: "count(//testcase[@name='testRick']) = 1 and count(//testcase[@name='testRick']//failure) = 0"
+      score: 10
+      message: "testRick succeeded"
+      name: "Library"
+    - selector: "count(//testcase[@name='testRick']) = 1 and count(//testcase[@name='testRick']//failure) > 0"
+      score: 0
+      message: "testRick failed"
+      name: "Library"
+    - selector: "count(//testsuite[@name='edu.illinois.cs.cs125.spring2019.mp3.ApiAppTest']) = 0"
+      score: 0
+      message: "ApiAppTest didn't compile"
+      name: "App"
+    - selector: "count(//testcase[@name='testApiRequest']) = 1 and count(//testcase[@name='testApiRequest']//failure) > 0"
+      score: 0
+      message: "testApiRequest failed"
+      name: "App"
+    - selector: "count(//testcase[@name='testApiRequest']) = 1 and count(//testcase[@name='testApiRequest']//failure) = 0"
+      score: 5
+      message: "testApiRequest succeeded"
+      name: "App"
+    - selector: "count(//testcase[@name='testMetadataDisplay']) = 1 and count(//testcase[@name='testMetadataDisplay']//failure) > 0"
+      score: 0
+      message: "testMetadataDisplay failed"
+      name: "App"
+    - selector: "count(//testcase[@name='testMetadataDisplay']) = 1 and count(//testcase[@name='testMetadataDisplay']//failure) = 0"
+      score: 5
+      message: "testMetadataDisplay succeeded"
+      name: "App"
+    - selector: "count(//testcase[@name='testCaptionDisplay']) = 1 and count(//testcase[@name='testCaptionDisplay']//failure) > 0"
+      score: 0
+      message: "testCaptionDisplay failed"
+      name: "App"
+    - selector: "count(//testcase[@name='testCaptionDisplay']) = 1 and count(//testcase[@name='testCaptionDisplay']//failure) = 0"
+      score: 5
+      message: "testCaptionDisplay succeeded"
+      name: "App"
+    - selector: "count(//testcase[@name='testAnimalIndicators']) = 1 and count(//testcase[@name='testAnimalIndicators']//failure) > 0"
+      score: 0
+      message: "testAnimalIndicators failed"
+      name: "App"
+    - selector: "count(//testcase[@name='testAnimalIndicators']) = 1 and count(//testcase[@name='testAnimalIndicators']//failure) = 0"
+      score: 10
+      message: "testAnimalIndicators succeeded"
+      name: "App"
