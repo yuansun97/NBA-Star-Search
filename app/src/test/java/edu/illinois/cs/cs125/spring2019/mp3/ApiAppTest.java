@@ -103,6 +103,10 @@ public class ApiAppTest {
         // Set an image
         setImage();
 
+        // Make sure an API key has been configured
+        Assert.assertNotEquals("No Cognitive Services API key is present - add it to secrets.properties",
+                "", BuildConfig.API_KEY);
+
         // Instrument the networking capabilities
         final Uri[] lastUri = {null};
         RequestQueue queueSpy = Mockito.spy(activity.getRequestQueue());
