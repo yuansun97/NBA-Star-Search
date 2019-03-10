@@ -142,7 +142,7 @@ public final class RecognizePhoto {
         JsonObject rootObject = parser.parse(jsonString).getAsJsonObject();
         JsonArray captionsArray = rootObject.getAsJsonObject("description").getAsJsonArray("captions");
         for (JsonElement caption: captionsArray) {
-            if (caption.getAsJsonObject().get("text").getAsString().contains("rick")) {
+            if (caption.getAsJsonObject().get("text").getAsString().toLowerCase().contains("rick astley")) {
                 return true;
             }
         }
