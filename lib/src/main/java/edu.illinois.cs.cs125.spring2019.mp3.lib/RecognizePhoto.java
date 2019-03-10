@@ -2,6 +2,7 @@ package edu.illinois.cs.cs125.spring2019.mp3.lib;
 
 import com.google.gson.JsonArray;
 //import com.google.gson.JsonElement;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
@@ -137,17 +138,14 @@ public final class RecognizePhoto {
         if (jsonString == null) {
             return false;
         }
-        if (RecognizePhoto.getCaption(jsonString).contains("rick")) {
-            return true;
+        JsonParser parser = new JsonParser();
+        JsonObject rootObject = parser.parse(jsonString).getAsJsonObject();
+        JsonArray captionsArray = rootObject.getAsJsonObject("description").getAsJsonArray("captions");
+        for (JsonElement caption: captionsArray) {
+            if (caption.getAsJsonObject().get("text").getAsString().contains("rick")) {
+                return true;
+            }
         }
-        //JsonParser parser = new JsonParser();
-        //JsonObject rootObject = parser.parse(jsonString).getAsJsonObject();
-        //JsonArray captionsArray = rootObject.get("description").getAsJsonObject().get("captions").getAsJsonArray();
-        //for (int i = 0; i < captionsArray.size(); ++i) {
-        //    if (captionsArray.get(i).getAsJsonObject().get("text").getAsString().contains("rick")) {
-        //        return true;
-        //    }
-        //}
         return false;
     }
 
