@@ -137,14 +137,17 @@ public final class RecognizePhoto {
         if (jsonString == null) {
             return false;
         }
-        JsonParser parser = new JsonParser();
-        JsonObject rootObject = parser.parse(jsonString).getAsJsonObject();
-        JsonArray captionsArray = rootObject.get("description").getAsJsonObject().get("captions").getAsJsonArray();
-        for (int i = 0; i < captionsArray.size(); ++i) {
-            if (captionsArray.get(i).getAsJsonObject().get("text").getAsString().contains("rick")) {
-                return true;
-            }
+        if (RecognizePhoto.getCaption(jsonString).contains("rick")) {
+            return true;
         }
+        //JsonParser parser = new JsonParser();
+        //JsonObject rootObject = parser.parse(jsonString).getAsJsonObject();
+        //JsonArray captionsArray = rootObject.get("description").getAsJsonObject().get("captions").getAsJsonArray();
+        //for (int i = 0; i < captionsArray.size(); ++i) {
+        //    if (captionsArray.get(i).getAsJsonObject().get("text").getAsString().contains("rick")) {
+        //        return true;
+        //    }
+        //}
         return false;
     }
 
