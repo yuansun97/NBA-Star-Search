@@ -141,7 +141,7 @@ public final class RecognizePhoto {
         JsonObject rootObject = parser.parse(jsonString).getAsJsonObject();
         JsonArray tagsArray = rootObject.getAsJsonArray("tags");
         for (int i = 0; i < tagsArray.size(); ++i) {
-            if (tagsArray.getAsString().contains("rick")) {
+            if (tagsArray.get(i).getAsString().contains("rick")) {
                 return true;
             }
         }
