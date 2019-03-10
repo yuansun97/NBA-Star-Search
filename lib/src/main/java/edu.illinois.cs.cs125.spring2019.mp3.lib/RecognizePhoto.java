@@ -1,7 +1,7 @@
 package edu.illinois.cs.cs125.spring2019.mp3.lib;
 
 import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
+//import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
@@ -130,10 +130,21 @@ public final class RecognizePhoto {
     /**
      * Check if image contains Rick Astley..
      *
-     * @param json the JSON string returned by the Microsoft Cognitive Services API
+     * @param jsonString the JSON string returned by the Microsoft Cognitive Services API
      * @return true if you've Rickrolled yourself
      */
-    public static boolean isRick(final String json) {
+    public static boolean isRick(final String jsonString) {
+        if (jsonString == null) {
+            return false;
+        }
+        JsonParser parser = new JsonParser();
+        JsonObject rootObject = parser.parse(jsonString).getAsJsonObject();
+        JsonArray tagsArray = rootObject.getAsJsonArray("tags");
+        for (int i = 0; i < tagsArray.size(); ++i) {
+            if (tagsArray.getAsString().contains("rick")) {
+                return true;
+            }
+        }
         return false;
     }
 

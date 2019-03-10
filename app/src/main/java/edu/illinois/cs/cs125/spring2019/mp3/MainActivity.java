@@ -45,7 +45,12 @@ import java.util.Date;
 import java.util.Locale;
 
 import edu.illinois.cs.cs125.spring2019.mp3.lib.RecognizePhoto;
-
+/**
+ * Image recognition class.
+ * Each function takes the JSON returned by the Microsoft Cognitive Services API
+ * and extracts some piece of information from it.
+ *
+ */
 public final class MainActivity extends AppCompatActivity {
     /** Default logging tag for messages from the main activity. */
     private static final String TAG = "MP3:Main";
