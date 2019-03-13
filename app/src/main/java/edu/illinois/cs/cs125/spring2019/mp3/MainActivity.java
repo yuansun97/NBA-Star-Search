@@ -325,11 +325,23 @@ public final class MainActivity extends AppCompatActivity {
         /*
          * Update the UI to display the string.
          */
-
+        TextView descriptionTextView = findViewById(R.id.descriptionTextView);
+        descriptionTextView.setText(description);
+        descriptionTextView.setVisibility(View.VISIBLE);
+        textView.setVisibility(View.VISIBLE);
         /*
          * Add code here to show the caption, show or hide the dog and cat icons,
          * and deal with Rick.
          */
+        TextView captionTextView = findViewById(R.id.captionTextView);
+        captionTextView.setText(RecognizePhoto.getCaption(jsonResult));
+        captionTextView.setVisibility(View.VISIBLE);
+        if (RecognizePhoto.isACat(jsonResult, RECOGNITION_THRESHOLD)) {
+            findViewById(R.id.xyzImage).setVisibility(View.VISIBLE);
+        }
+        if (RecognizePhoto.isADog(jsonResult, RECOGNITION_THRESHOLD)) {
+            findViewById(R.id.chuchuImage).setVisibility(View.VISIBLE);
+        }
     }
 
     /** Current bitmap we are working with. */
@@ -338,7 +350,7 @@ public final class MainActivity extends AppCompatActivity {
     /**
      * Process a photo.
      *
-     * Resizes an image and loads it into the UI.
+     * Resize an image and loads it into the UI.
      *
      * @param currentPhotoURI URI of the image to process
      */
@@ -423,11 +435,19 @@ public final class MainActivity extends AppCompatActivity {
         enableOrDisableButtons(true);
 
         // Reset the displayed fields to default values. For you to finish!
-        /*
         if (resetInfo) {
-
+            TextView captionTextView = findViewById(R.id.captionTextView);
+            captionTextView.setText(R.string.image_caption);
+            captionTextView.setVisibility(View.GONE);
+            TextView textView = findViewById(R.id.jsonResult);
+            textView.setText(" ");
+            textView.setVisibility(View.GONE);
+            TextView descriptionTextView = findViewById(R.id.descriptionTextView);
+            descriptionTextView.setText(R.string.image_description);
+            descriptionTextView.setVisibility(View.GONE);
+            findViewById(R.id.chuchuImage).setVisibility(View.GONE);
+            findViewById(R.id.xyzImage).setVisibility(View.GONE);
         }
-        */
     }
 
     /**

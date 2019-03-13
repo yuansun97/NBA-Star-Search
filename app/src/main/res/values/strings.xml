@@ -8,4 +8,6 @@
     <string name="process_image">Process Image</string>
     <string name="download_file">Download File</string>
     <string name="is_a_dog">Is A Dog</string>
+    <string name="image_description">Image Description</string>>
+    <string name="image_caption">Image Caption</string>
 </resources>
