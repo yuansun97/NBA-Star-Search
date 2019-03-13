@@ -243,6 +243,7 @@ class Tasks {
         /**
          * Processes a response from the image recognition API.
          * @param response The JSON text of the response.
+         *
          */
         void handleApiResponse(final String response) {
             // On success, clear the progress bar and call finishProcessImage
