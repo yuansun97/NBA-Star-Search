@@ -338,9 +338,13 @@ public final class MainActivity extends AppCompatActivity {
         captionTextView.setVisibility(View.VISIBLE);
         if (RecognizePhoto.isACat(jsonResult, RECOGNITION_THRESHOLD)) {
             findViewById(R.id.xyzImage).setVisibility(View.VISIBLE);
+        } else {
+            findViewById(R.id.xyzImage).setVisibility(View.GONE);
         }
         if (RecognizePhoto.isADog(jsonResult, RECOGNITION_THRESHOLD)) {
             findViewById(R.id.chuchuImage).setVisibility(View.VISIBLE);
+        } else {
+            findViewById(R.id.chuchuImage).setVisibility(View.GONE);
         }
     }
 

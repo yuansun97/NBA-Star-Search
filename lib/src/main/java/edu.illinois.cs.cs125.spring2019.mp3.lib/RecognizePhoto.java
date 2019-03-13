@@ -26,6 +26,9 @@ public final class RecognizePhoto {
         }
         JsonParser parser = new JsonParser();
         JsonObject rootObject = parser.parse(jsonString).getAsJsonObject();
+        if (rootObject == null) {
+            return 0;
+        }
         int width = rootObject.getAsJsonObject("metadata").get("width").getAsInt();
         return width;
     }
@@ -42,6 +45,9 @@ public final class RecognizePhoto {
         }
         JsonParser parser = new JsonParser();
         JsonObject rootObject = parser.parse(jsonString).getAsJsonObject();
+        if (rootObject == null) {
+            return 0;
+        }
         int height = rootObject.getAsJsonObject("metadata").get("height").getAsInt();
         return height;
     }
@@ -58,6 +64,9 @@ public final class RecognizePhoto {
         }
         JsonParser parser = new JsonParser();
         JsonObject rootObject = parser.parse(jsonString).getAsJsonObject();
+        if (rootObject == null) {
+            return null;
+        }
         String format = rootObject.getAsJsonObject("metadata").get("format").getAsString();
         return format;
     }
@@ -76,6 +85,9 @@ public final class RecognizePhoto {
         }
         JsonParser parser = new JsonParser();
         JsonObject rootObject = parser.parse(jsonString).getAsJsonObject();
+        if (rootObject == null) {
+            return null;
+        }
         JsonArray captionArray = rootObject.getAsJsonObject("description").getAsJsonArray("captions");
         return captionArray.get(0).getAsJsonObject().get("text").getAsString();
     }
@@ -93,6 +105,9 @@ public final class RecognizePhoto {
         }
         JsonParser parser = new JsonParser();
         JsonObject rootObject = parser.parse(jsonString).getAsJsonObject();
+        if (rootObject == null) {
+            return false;
+        }
         JsonArray tagsArray = rootObject.getAsJsonArray("tags");
         for (int i = 0; i < tagsArray.size(); ++i) {
             if (tagsArray.get(i).getAsJsonObject().get("name").getAsString().equals("dog")) {
@@ -117,6 +132,9 @@ public final class RecognizePhoto {
         }
         JsonParser parser = new JsonParser();
         JsonObject rootObject = parser.parse(jsonString).getAsJsonObject();
+        if (rootObject == null) {
+            return false;
+        }
         JsonArray tagsArray = rootObject.getAsJsonArray("tags");
         for (int i = 0; i < tagsArray.size(); ++i) {
             if (tagsArray.get(i).getAsJsonObject().get("name").getAsString().equals("cat")) {
@@ -140,6 +158,9 @@ public final class RecognizePhoto {
         }
         JsonParser parser = new JsonParser();
         JsonObject rootObject = parser.parse(jsonString).getAsJsonObject();
+        if (rootObject == null) {
+            return false;
+        }
         JsonArray captionsArray = rootObject.getAsJsonObject("description").getAsJsonArray("captions");
         for (JsonElement caption: captionsArray) {
             if (caption.getAsJsonObject().get("text").getAsString().toLowerCase().contains("rick astley")) {
