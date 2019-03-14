@@ -147,7 +147,7 @@ class Tasks {
         private static final String MS_CV_API_DEFAULT_LANGUAGE = "en";
 
         /** Default visual features to request. You may need to change this value. */
-        private static final String MS_CV_API_DEFAULT_DETAILS = "Animals";
+        private static final String MS_CV_API_DEFAULT_DETAILS = "Landmarks";
 
         /** Subscription key. */
         private static final String SUBSCRIPTION_KEY = BuildConfig.API_KEY;

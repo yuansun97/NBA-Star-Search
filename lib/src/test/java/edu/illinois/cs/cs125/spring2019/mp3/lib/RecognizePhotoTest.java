@@ -106,6 +106,21 @@ public class RecognizePhotoTest {
     }
 
     /**
+     * Test Rick Astley identification.
+     */
+    @Test(timeout = RECOGNIZE_TEST_TIMEOUT)
+    public void testRick() {
+        for (RecognizePhotoTestInput input : PRECOMPUTED_RESULTS) {
+            Assert.assertEquals("photo should be recognized as Rick Astley:",
+                    input.isRick, RecognizePhoto.isRick(input.json));
+            if (input.isRick) {
+                Assert.assertTrue("photo should be recognized as Rick Astley",
+                        RecognizePhoto.isRick(input.json));
+            }
+        }
+    }
+
+    /**
      * Class for storing pre-computed results and test inputs.
      */
     public static class RecognizePhotoTestInput {

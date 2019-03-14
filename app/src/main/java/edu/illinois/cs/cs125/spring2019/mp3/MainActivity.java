@@ -3,6 +3,8 @@ package edu.illinois.cs.cs125.spring2019.mp3;
 import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.ActivityNotFoundException;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -44,6 +46,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import javax.crypto.spec.RC2ParameterSpec;
+
 import edu.illinois.cs.cs125.spring2019.mp3.lib.RecognizePhoto;
 /**
  * Image recognition class.
@@ -66,6 +70,12 @@ public final class MainActivity extends AppCompatActivity {
 
     /** Threshold for calling something a dog or cat. */
     private static final double RECOGNITION_THRESHOLD = 0.9;
+
+    /** Video ID of Rick Astley in YouTube. */
+    private static final String RICK_VIDEO_ID = "dQw4w9WgXcQ";
+
+    /** Video ID of Jay Chou in YouTube. */
+    private static final String JAY_CHOU_VIDEO_ID = "Bbp9ZaJD_eA";
 
     /** Request queue for our network requests. */
     private RequestQueue requestQueue;
@@ -346,6 +356,12 @@ public final class MainActivity extends AppCompatActivity {
         } else {
             findViewById(R.id.chuchuImage).setVisibility(View.GONE);
         }
+        if (RecognizePhoto.isRick(jsonResult)) {
+            playYoutubeVideo(this, RICK_VIDEO_ID);
+        }
+        if (RecognizePhoto.isJayChou(jsonResult)) {
+            playYoutubeVideo(this, JAY_CHOU_VIDEO_ID);
+        }
     }
 
     /** Current bitmap we are working with. */
@@ -519,5 +535,21 @@ public final class MainActivity extends AppCompatActivity {
      */
     void setRequestQueue(final RequestQueue newQueue) {
         requestQueue = newQueue;
+    }
+
+    /**
+     * Play the Rick Astley vedio.
+     * @param context the
+     * @param id the
+     */
+    public static void playYoutubeVideo(final Context context, final String id) {
+        Intent appIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("vnd.youtube:" + id));
+        Intent webIntent = new Intent(Intent.ACTION_VIEW,
+                Uri.parse("http://www.youtube.com/watch?v=" + id));
+        try {
+            context.startActivity(appIntent);
+        } catch (ActivityNotFoundException ex) {
+            context.startActivity(webIntent);
+        }
     }
 }

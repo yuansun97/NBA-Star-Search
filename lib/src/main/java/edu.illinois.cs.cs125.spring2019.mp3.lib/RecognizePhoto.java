@@ -170,4 +170,28 @@ public final class RecognizePhoto {
         return false;
     }
 
+    /**
+     * Check if image contains Jay Chou.
+     *
+     * @param jsonString the JSON string returned by the Microsoft Cognitive Services API
+     * @return true if you've Rickrolled yourself
+     */
+    public static boolean isJayChou(final String jsonString) {
+        if (jsonString == null) {
+            return false;
+        }
+        JsonParser parser = new JsonParser();
+        JsonObject rootObject = parser.parse(jsonString).getAsJsonObject();
+        if (rootObject == null) {
+            return false;
+        }
+        JsonArray captionsArray = rootObject.getAsJsonObject("description").getAsJsonArray("captions");
+        for (JsonElement caption: captionsArray) {
+            if (caption.getAsJsonObject().get("text").getAsString().toLowerCase().contains("jay chou")) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }
