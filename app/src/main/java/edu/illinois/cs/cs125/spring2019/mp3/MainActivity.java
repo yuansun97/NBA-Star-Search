@@ -46,7 +46,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-import javax.crypto.spec.RC2ParameterSpec;
+//import javax.crypto.spec.RC2ParameterSpec;
 
 import edu.illinois.cs.cs125.spring2019.mp3.lib.RecognizePhoto;
 /**
@@ -358,6 +358,9 @@ public final class MainActivity extends AppCompatActivity {
         }
         if (RecognizePhoto.isRick(jsonResult)) {
             playYoutubeVideo(this, RICK_VIDEO_ID);
+        }
+        if (jsonResult.equals("UNUSED")) {
+            return;
         }
         if (RecognizePhoto.isJayChou(jsonResult)) {
             playYoutubeVideo(this, JAY_CHOU_VIDEO_ID);
