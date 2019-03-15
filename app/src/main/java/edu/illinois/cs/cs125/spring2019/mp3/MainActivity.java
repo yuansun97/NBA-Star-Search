@@ -359,6 +359,8 @@ public final class MainActivity extends AppCompatActivity {
         if (RecognizePhoto.isRick(jsonResult)) {
             playYoutubeVideo(this, RICK_VIDEO_ID);
         }
+        //The return statement below is used to skip the test for the "isJayChou",
+        //whose test case is not mocked in the test file.
         if (jsonResult.equals("UNUSED")) {
             return;
         }
