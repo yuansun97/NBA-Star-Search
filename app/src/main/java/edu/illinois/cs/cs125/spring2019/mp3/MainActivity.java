@@ -110,16 +110,6 @@ public final class MainActivity extends AppCompatActivity {
             Log.d(TAG, "Take photo button clicked");
             startTakePhoto();
         });
-        final ImageButton downloadFile = findViewById(R.id.downloadFile);
-        downloadFile.setOnClickListener(v -> {
-            Log.d(TAG, "Download file button click");
-            startDownloadFile();
-        });
-        final ImageButton rotateLeft = findViewById(R.id.rotateLeft);
-        rotateLeft.setOnClickListener(v -> {
-            Log.d(TAG, "Rotate left button clicked");
-            rotateLeft();
-        });
         final ImageButton processImage = findViewById(R.id.processImage);
         processImage.setOnClickListener(v -> {
             Log.d(TAG, "Process image button clicked");
@@ -381,9 +371,6 @@ public final class MainActivity extends AppCompatActivity {
      */
     private void loadPhoto(final Uri currentPhotoURI) {
         enableOrDisableButtons(false);
-        final ImageButton rotateLeft = findViewById(R.id.rotateLeft);
-        rotateLeft.setClickable(false);
-        rotateLeft.setEnabled(false);
 
         if (currentPhotoURI == null) {
             Toast.makeText(getApplicationContext(), "No image selected",
@@ -483,9 +470,6 @@ public final class MainActivity extends AppCompatActivity {
      * @param enableOrDisable whether to enable or disable the buttons
      */
     private void enableOrDisableButtons(final boolean enableOrDisable) {
-        final ImageButton rotateLeft = findViewById(R.id.rotateLeft);
-        rotateLeft.setClickable(enableOrDisable);
-        rotateLeft.setEnabled(enableOrDisable);
         final ImageButton processImage = findViewById(R.id.processImage);
         processImage.setClickable(enableOrDisable);
         processImage.setEnabled(enableOrDisable);

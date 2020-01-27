@@ -67,21 +67,6 @@
                 app:srcCompat="@drawable/ic_folder_open_black_24dp" />
 
             <ImageButton
-                android:id="@+id/rotateLeft"
-                android:layout_width="wrap_content"
-                android:layout_height="48dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="8dp"
-                android:contentDescription="@string/rotate_left"
-                android:scaleType="fitCenter"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/processImage"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0"
-                app:srcCompat="@drawable/ic_rotate_left_black_24dp" />
-
-            <ImageButton
                 android:id="@+id/processImage"
                 android:layout_width="wrap_content"
                 android:layout_height="48dp"
@@ -95,21 +80,6 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.0"
                 app:srcCompat="@drawable/ic_cloud_upload_black_24dp" />
-
-            <ImageButton
-                android:id="@+id/downloadFile"
-                android:layout_width="wrap_content"
-                android:layout_height="48dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
-                android:contentDescription="@string/download_file"
-                android:scaleType="fitCenter"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/takePhoto"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0"
-                app:srcCompat="@drawable/ic_file_download_black_24dp" />
 
             <ImageButton
                 android:id="@+id/takePhoto"
@@ -129,16 +99,13 @@
                 android:id="@+id/descriptionTextView"
                 android:layout_width="86dp"
                 android:layout_height="38dp"
-                android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
                 android:layout_marginBottom="16dp"
                 android:text="@string/image_description"
                 android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/rotateLeft"
-                app:layout_constraintStart_toEndOf="@+id/downloadFile"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_editor_absoluteX="300dp" />
 
         </android.support.constraint.ConstraintLayout>
 
